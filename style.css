@@ -1,0 +1,27 @@
+div {
+  display: inline-block;
+
+  margin-left: 50%; /*Center inline-block*/
+  transform: translateX(-50%);
+
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: gray;
+  border: 2px solid black;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+form {
+  padding: 10px;
+  text-align: center;
+}
+
+input[type="submit"] {
+  background-color: #b46464;
+  border: none;
+  color: rgb(255, 255, 255);
+  padding: 5px 10px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
