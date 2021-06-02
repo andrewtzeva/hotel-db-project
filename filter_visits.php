@@ -22,20 +22,6 @@
         <input name="set" type="submit">
     </form>
 </div>
-<br><br>
-<!-- <div>
-    <form method="">
-        <h2>Sales</h2>
-        Select view:
-        <select id="view_option" name="view_option">
-            <option value="" selected="selected">(none)</option>
-            <option value="0">per Service</option>
-            <option value="0">per Customer</option>
-        </select>
-    </form>
-</div>
-<br><br>
-
 
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
