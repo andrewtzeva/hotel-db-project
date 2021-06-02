@@ -1,7 +1,17 @@
-<form method="post">
-<input type="text" name="choice_id" placeholder="choice_id">
-<input name="set" type="submit">
-</form>
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<div>
+    <form method="post">
+        <h2>Sales</h2>
+        Select view:
+        <select id="view_option" name="choice_id">
+            <option value="" selected="selected">(none)</option>
+            <option value="0">Sales per Service</option>
+            <option value="1">Customer Details</option>
+        </select>
+        <input name="set" type="submit">
+    </form>
+</div>
 
 
 <?php

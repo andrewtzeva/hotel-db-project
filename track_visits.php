@@ -1,8 +1,13 @@
-<form method="post">
-<input type="text" name="nfc_id" placeholder="NFC ID">
-<input name="set" type="submit">
-</form>
+<link rel="stylesheet" type="text/css" href="style.css">
 
+<div>
+    <form method="post">
+        <h2>Covid Protocol Customer Tracking</h2>
+        Insert customer's NFC ID:
+        <input type="text" name="nfc_id" placeholder="nfc_id">
+        <input name="set" type="submit">
+    </form>
+</div>
 
 <?php
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
