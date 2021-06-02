@@ -8,48 +8,50 @@
         <input name="set" type="submit">
     </form>
 </div>
+<br><br>
 
 <?php
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-        include 'connection.php';
+    include 'connection.php';
 
-        $conn = connect();
+    $conn = connect();
 
-        $nfc_id = isset($_POST['nfc_id']) ? $_POST['nfc_id'] : false;
+    $nfc_id = isset($_POST['nfc_id']) ? $_POST['nfc_id'] : false;
 
-        $nfc_id = $nfc_id == "" ? "nfc_id" : $nfc_id;
+    $nfc_id = $nfc_id == "" ? "nfc_id" : $nfc_id;
 
-        $sql = "select nfc_id, venue_id, entrance_tmst, exit_tmst from visit where nfc_id = ".$nfc_id." order by entrance_tmst;";
+    $sql = "select nfc_id, venue_id, entrance_tmst, exit_tmst from visit where nfc_id = " . $nfc_id . " order by entrance_tmst;";
 
-        
 
-        $result = $conn->query($sql);
 
-        if ($nfc_id > 0) {
-            echo "<table>";
+    $result = $conn->query($sql);
+
+    if ($nfc_id > 0) {
+        echo "<div>";
+        echo "<table>";
+        echo "<tr>";
+        echo "<th> NFC ID </th>";
+        echo "<th> venue ID </th>";
+        echo "<th> Entrance Datetime </th>";
+        echo "<th> Exit Datetime </th>";
+        echo "</tr>";
+
+        while ($row = $result->fetch_array()) {
             echo "<tr>";
-            echo "<th> NFC ID </th>";
-            echo "<th> venue ID </th>";
-            echo "<th> Entrance Datetime </th>";
-            echo "<th> Exit Datetime </th>";
+            echo "<td>" . $row["nfc_id"] . "</td>";
+            echo "<td>" . $row["venue_id"] . "</td>";
+            echo "<td>" . $row["entrance_tmst"] . "</td>";
+            echo "<td>" . $row["exit_tmst"] . "</td>";
             echo "</tr>";
-        
-            while($row = $result->fetch_array()) {
-                echo "<tr>";
-                echo "<td>".$row["nfc_id"]."</td>";
-                echo "<td>".$row["venue_id"]."</td>";
-                echo "<td>".$row["entrance_tmst"]."</td>";
-                echo "<td>".$row["exit_tmst"]."</td>";
-                echo "</tr>";
-            }
-
-            echo "</table>";
-            
-        } else {
-            echo "<p>Enter the info above</p>";
         }
 
-        $conn->close();
+        echo "</table>";
+        echo "</div>";
+    } else {
+        echo "<p>Enter the info above</p>";
     }
+
+    $conn->close();
+}
 ?>
