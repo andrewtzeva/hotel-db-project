@@ -11,7 +11,6 @@
             <option value="4">Use of sauna</option>
             <option value="5">Hair salon services</option>
             <option value="6">Meeting room reservation</option>
-            <option value="7">Room reservation</option>
         </select>
         Select date:
         <input type="date" id="visit_date" name="visit_date" value="2021-05-28" min="2018-01-01" max="2030-12-31">
@@ -46,13 +45,13 @@
                     inner join provided_to as pt on ve.venue_id = pt.venue_id inner join customer as c on v.nfc_id = c.nfc_id inner join
                     get_services as gs on c.nfc_id = gs.nfc_id inner join service_cost as sc on gs.charge_tmst = sc.charge_tmst
                     where pt.service_id =".$service_id."
-                    and v.entrance_tmst between '".$visit_date."' and '".$visit_date." 23:59:59' and sc.cost between ".$service_cost_min." and ".$service_cost_max.";";
+                    and v.entrance_tmst between '".$visit_date."' and '".$visit_date." 23:59:59' and sc.cost between ".$service_cost_min." and ".$service_cost_max." and pt.service_id !=7;";
             } else {
                 $sql = "select distinct v.nfc_id, v.venue_id, v.entrance_tmst, v.exit_tmst, pt.service_id, sc.cost from visit as v inner join venue as ve on v.venue_id = ve.venue_id
                     inner join provided_to as pt on ve.venue_id = pt.venue_id inner join customer as c on v.nfc_id = c.nfc_id inner join
                     get_services as gs on c.nfc_id = gs.nfc_id inner join service_cost as sc on gs.charge_tmst = sc.charge_tmst
                     where pt.service_id =" . $service_id . "
-                    and sc.cost between ".$service_cost_min." and ".$service_cost_max.";";
+                    and sc.cost between ".$service_cost_min." and ".$service_cost_max." and pt.service_id !=7;";
         }
 
 
