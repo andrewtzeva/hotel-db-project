@@ -13,7 +13,7 @@
             <option value="6">Meeting room reservation</option>
         </select>
         Select date:
-        <input type="date" id="visit_date" name="visit_date" value="2021-05-28" min="2018-01-01" max="2030-12-31">
+        <input type="date" id="visit_date" name="visit_date" value="" min="2018-01-01" max="2030-12-31">
         <br><br>
         Select cost range:
         <input type="text" name="service_cost_min" placeholder="Minimum cost">
@@ -42,17 +42,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $service_cost_max = $service_cost_max == "" ? 10000 : $service_cost_max;
 
     if ($visit_date) {
-        $sql = "select distinct v.nfc_id, v.venue_id, v.entrance_tmst, v.exit_tmst, pt.service_id, sc.cost from visit as v inner join venue as ve on v.venue_id = ve.venue_id
-                    inner join provided_to as pt on ve.venue_id = pt.venue_id inner join customer as c on v.nfc_id = c.nfc_id inner join
-                    get_services as gs on c.nfc_id = gs.nfc_id inner join service_cost as sc on gs.charge_tmst = sc.charge_tmst
+        $sql = "select distinct v.nfc_id, v.venue_id, v.entrance_tmst, v.exit_tmst, pt.service_id, sc.cost 
+                    from visit as v 
+                    inner join venue as ve on v.venue_id = ve.venue_id
+                    inner join provided_to as pt on ve.venue_id = pt.venue_id
+                    inner join get_services as gs on (pt.service_id = gs.service_id and gs.charge_tmst = v.exit_tmst)
+                    inner join service_cost as sc on (gs.receipt_number = sc.receipt_number)
                     where pt.service_id =" . $service_id . "
-                    and v.entrance_tmst between '" . $visit_date . "' and '" . $visit_date . " 23:59:59' and sc.cost between " . $service_cost_min . " and " . $service_cost_max . " and pt.service_id !=7;";
+                    and v.entrance_tmst between '" . $visit_date . "' and '" . $visit_date . " 23:59:59' and sc.cost between " . $service_cost_min . " and " . $service_cost_max . " and pt.service_id !=7
+                    order by v.entrance_tmst;";
     } else {
-        $sql = "select distinct v.nfc_id, v.venue_id, v.entrance_tmst, v.exit_tmst, pt.service_id, sc.cost from visit as v inner join venue as ve on v.venue_id = ve.venue_id
-                    inner join provided_to as pt on ve.venue_id = pt.venue_id inner join customer as c on v.nfc_id = c.nfc_id inner join
-                    get_services as gs on c.nfc_id = gs.nfc_id inner join service_cost as sc on gs.charge_tmst = sc.charge_tmst
+        $sql = "select distinct v.nfc_id, v.venue_id, v.entrance_tmst, v.exit_tmst, pt.service_id, sc.cost 
+                    from visit as v 
+                    inner join venue as ve on v.venue_id = ve.venue_id
+                    inner join provided_to as pt on ve.venue_id = pt.venue_id
+                    inner join get_services as gs on (pt.service_id = gs.service_id and gs.charge_tmst = v.exit_tmst)
+                    inner join service_cost as sc on (gs.receipt_number = sc.receipt_number)
                     where pt.service_id =" . $service_id . "
-                    and sc.cost between " . $service_cost_min . " and " . $service_cost_max . " and pt.service_id !=7;";
+                    and sc.cost between " . $service_cost_min . " and " . $service_cost_max . " and pt.service_id !=7
+                    order by v.entrance_tmst;";
     }
 
 
