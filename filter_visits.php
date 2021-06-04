@@ -1,5 +1,6 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 <div>
+    <a href="http://localhost/hotel-db-project/index.html"><button type="button" id="bb">Homepage</button></a>
     <form method="post">
         <h2>Visits</h2>
         Select service:

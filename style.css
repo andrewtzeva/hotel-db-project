@@ -37,6 +37,10 @@ button {
   border: 1px solid black;
 }
 
+#bb {
+  width: auto;
+}
+
 table {
   padding: 10px;
   border: 1px solid black;
