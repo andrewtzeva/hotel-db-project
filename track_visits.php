@@ -6,7 +6,12 @@
         <form method="post">
             <h2>Covid Protocol Customer Tracking</h2>
             Insert customer's NFC ID:
-            <input type="text" name="nfc_id" placeholder="nfc_id">
+            <input type="text" name="nfc_id" placeholder="nfc_id"><br /><br />
+            Show customers in risk of infection:
+            <select id="view_option" name="choice_id">
+                <option value="0" selected="selected">Toggle Off</option>
+                <option value="1">Toggle On</option>
+            </select>
             <input name="set" type="submit">
         </form>
     </div>
