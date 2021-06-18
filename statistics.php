@@ -96,9 +96,10 @@
             }
 
 
-            $result = $conn->query($sql);
+            
 
             if ($stat_cat != "" and $date_range != "" and $age_range != "") {
+                $result = $conn->query($sql);
 
                 switch ($stat_cat) {
                     case 1:
@@ -117,7 +118,7 @@
                         break;
                     case 3:
                         $column1_title = 'service ID';
-                        $column2_title = '#Uses';
+                        $column2_title = '#Users';
 
                         $column1_name = 'service_id';
                         $column2_name = 'service_pop';
