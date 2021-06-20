@@ -4,7 +4,7 @@
     <div class='container'>
         <a href="http://localhost/hotel-db-project/index.html"><button type="button" id="bb">Homepage</button></a>
         <form method="post">
-            <h2>Sales</h2>
+            <h2>Main Views</h2>
             Select view:
             <select id="view_option" name="choice_id">
                 <option value="" selected="selected">(none)</option>
@@ -29,10 +29,9 @@
         $choice_id = $choice_id == "" ? false : $choice_id;
 
         if ($choice_id == 0) {
-            $sql = "select gs.service_id, gs.nfc_id, sc.cost, gs.charge_tmst from get_services as gs inner join service_cost as sc on gs.charge_tmst = sc.charge_tmst
-            order by gs.service_id;";
+            $sql = "select * from sales_per_service;";
         } else if ($choice_id == 1) {
-            $sql = "select * from customer;";
+            $sql = "select * from customer_details;";
         }
 
         $result = $conn->query($sql);
