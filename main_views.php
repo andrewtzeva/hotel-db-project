@@ -29,7 +29,7 @@
         $choice_id = $choice_id == "" ? false : $choice_id;
 
         if ($choice_id == 0) {
-            $sql = "select * from sales_per_service;";
+            $sql = "select * from sales_per_service order by service_id;";
         } else if ($choice_id == 1) {
             $sql = "select * from customer_details;";
         }
